@@ -55,7 +55,7 @@
 				]}];
 				$.getJSON("https://api.github.com/search/repositories?q=language:python&sort=updated", function(json){
 					myjson = json;
-					$('#feed').json2html(myjson.items,transform);
+					$('#feed').json2html(myjson.items.reverse(),transform);
 				});
 				setInterval(function(){
 					$.getJSON("https://api.github.com/search/repositories?q=language:python&sort=updated", function(json){
@@ -64,12 +64,12 @@
 							var $current_top_element = $('body').children().first();
 							if($("#" + value.id).length == 0) {
 								//console.log($('#'+value.id));
-								$('#feed').json2html(value,transform,{'prepend':'true'});
+								$('#feed').json2html(value,transform,{'append':'true'});
 							}
 							else{
 								if ($('#'+value.id).data("pushed") != value.pushed_at){
 									$('#'+value.id).remove();
-									$('#feed').json2html(value,transform,{'prepend':'true'});
+									$('#feed').json2html(value,transform,{'append':'true'});
 									//console.log(typeof($('#'+value.id).data("pushed")));
 									//console.log(typeof(value.pushed_at));
 									//console.log(value.id+"("+value.full_name+") changed from "+$('#'+value.id).data("pushed")+" to "+value.pushed_at);
