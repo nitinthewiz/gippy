@@ -1,7 +1,7 @@
 gippy
 =====
 
-A single page web app to explore the latest python project code check-ins on GitHub
+A single page web app to explore the latest python project code check-ins on GitHub. Also supports other languages like PHP. 
 
 Why?
 ====
@@ -11,7 +11,7 @@ Because I like exploring GitHub
 Future
 ======
 
-Extend to work with other languages
+- [x] Extend to work with other languages
 
 Bugs
 ====
