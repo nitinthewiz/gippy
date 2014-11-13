@@ -4,6 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>GIPPY - See the latest Python projects on GitHub</title>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.js"></script>
+		<!--<link rel="stylesheet" type="text/css" href="/css/result-light.css">-->
 		<script type="text/javascript" src="http://www.json2html.com/js/json2html.js"></script>
 		<script type="text/javascript" src="http://www.json2html.com/js/jquery.json2html.js"></script>
 		<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/spacelab/bootstrap.css">
@@ -20,6 +21,7 @@
 			}
 		</style>
 		<script type="text/javascript">
+			//console.log(myjson.items);
 			//<![CDATA[ 
 			$(window).load(function(){
 				// this function brought to us by http://css-tricks.com/snippets/javascript/get-url-variables/
@@ -88,9 +90,18 @@
 								if ($('#'+value.id).data("pushed") != value.pushed_at){
 									$('#'+value.id).remove();
 									$('#feed').json2html(value,transform,{'append':'true'});
+									//console.log(typeof($('#'+value.id).data("pushed")));
+									//console.log(typeof(value.pushed_at));
+									//console.log(value.id+"("+value.full_name+") changed from "+$('#'+value.id).data("pushed")+" to "+value.pushed_at);
 								}
 							}
+							// var previous_height = 0;
+							// $current_top_element.prevAll().each(function() {
+							//   previous_height += $(this).outerHeight();
+							// });
+							//$('body').scrollTop(previous_height);
 						});
+						//$('#feed').json2html(myjson.items,transform);
 					});
 				}, 30000);
 
