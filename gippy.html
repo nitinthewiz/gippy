@@ -4,7 +4,6 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>GIPPY - See the latest Python projects on GitHub</title>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.js"></script>
-		<!--<link rel="stylesheet" type="text/css" href="/css/result-light.css">-->
 		<script type="text/javascript" src="http://www.json2html.com/js/json2html.js"></script>
 		<script type="text/javascript" src="http://www.json2html.com/js/jquery.json2html.js"></script>
 		<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/spacelab/bootstrap.css">
@@ -21,7 +20,6 @@
 			}
 		</style>
 		<script type="text/javascript">
-			//console.log(myjson.items);
 			//<![CDATA[ 
 			$(window).load(function(){
 				// this function brought to us by http://css-tricks.com/snippets/javascript/get-url-variables/
@@ -33,6 +31,10 @@
 						if(pair[0] == variable){return pair[1];}
 					}
 					return(false);
+				}
+				// http://stackoverflow.com/questions/1026069/capitalize-the-first-letter-of-string-in-javascript
+				function capitaliseFirstLetter(string){
+					return string.charAt(0).toUpperCase() + string.slice(1);
 				}
 				var myjson;
 				var lang = "python";
@@ -64,8 +66,10 @@
 						]}
 					]}
 				]}];
+				console.log(getQueryVariable("lang"));
 				if(getQueryVariable("lang") != false){
 					lang = getQueryVariable("lang");
+					$('.thelang').text(capitaliseFirstLetter(lang));
 				}
 				$.getJSON("https://api.github.com/search/repositories?q=language:"+lang+"&sort=updated", function(json){
 					myjson = json;
@@ -84,27 +88,22 @@
 								if ($('#'+value.id).data("pushed") != value.pushed_at){
 									$('#'+value.id).remove();
 									$('#feed').json2html(value,transform,{'append':'true'});
-									//console.log(typeof($('#'+value.id).data("pushed")));
-									//console.log(typeof(value.pushed_at));
-									//console.log(value.id+"("+value.full_name+") changed from "+$('#'+value.id).data("pushed")+" to "+value.pushed_at);
 								}
 							}
-							var previous_height = 0;
-							$current_top_element.prevAll().each(function() {
-							  previous_height += $(this).outerHeight();
-							});
-							//$('body').scrollTop(previous_height);
 						});
-						//$('#feed').json2html(myjson.items,transform);
 					});
 				}, 30000);
+
+				$('h2').click(function() {
+					window.location= "./gippy.html"
+				});
 			});//]]>
 		</script>
 		<style type="text/css"></style>
 	</head>
 	<body>
-		<h2 align="center">Python Repos recently updated on GitHub</h2>
-		<h4 align="center">Also supports other languages, just try <a href="./gippy.html?lang=php">this link for php</a></h4>
+		<h2 align="center"><span class="thelang">Python</span> Repos recently updated on GitHub</h2>
+		<h4 align="center">Also supports other languages, just try <a href="./gippy.html?lang=php">this link for php</a>, <a href="./gippy.html?lang=javascript">this one for javascript</a> and <a href="./gippy.html?lang=swift">this one for swift</a>. The default language is python.</h4>
 		<div class="row">
 			<div class="col-lg-6 col-centered">
 				<ul class="list-group" id="feed"></ul>
