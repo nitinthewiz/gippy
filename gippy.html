@@ -70,6 +70,7 @@
 				if(getQueryVariable("lang") != false){
 					lang = getQueryVariable("lang");
 					$('.thelang').text(capitaliseFirstLetter(lang));
+					$(document).prop('title', 'GIPPY - See the latest '+capitaliseFirstLetter(lang)+' projects on GitHub');
 				}
 				$.getJSON("https://api.github.com/search/repositories?q=language:"+lang+"&sort=updated", function(json){
 					myjson = json;
