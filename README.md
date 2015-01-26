@@ -1,3 +1,5 @@
+Now supports Masonry!
+
 gippy
 =====
 
